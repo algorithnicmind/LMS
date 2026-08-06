@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LMS - Learning Management System
 
 Learning Management System (LMS) is a comprehensive platform for managing and delivering educational courses, assessments, and progress tracking. It serves as a bridge between instructors and learners, providing tools for creating, enrolling in, and completing courses.
@@ -160,3 +161,9 @@ The application uses JWT-based authentication.
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.   
+=======
+# LMS
+
+Make it a private repository
+>>>>>>> b5b821176c648685f118f0af0f95436c732290e0
+
