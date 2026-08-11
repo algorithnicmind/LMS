@@ -15,13 +15,17 @@
 - React Router for routing.
 - Axios for HTTP requests to Django API.
 - Context API or Redux Toolkit for auth/user state.
+- **Tailwind CSS** (v4) for styling and design-system tokens.
+- **Framer Motion** for animations: route transitions (`AnimatePresence`), scroll reveals, hover/press micro-interactions, animated counters.
+- **Three.js + @react-three/fiber + @react-three/drei** for the animated 3D hero background on the landing page.
+- **RBAC**: `ProtectedRoute` wrapper component reading user role from AuthContext; redirects unauthorized users by role.
 
 ### 1.2 Pages / Routes
 | Route                    | Access | Purpose                          |
 | ------------------------ | ------ | -------------------------------- |
-| `/`                      | Public | Home / course catalog            |
-| `/login`                 | Public | Login                            |
-| `/register`              | Public | Student registration             |
+| `/`                      | Public | **Animated landing page** (3D animated background, motion UI) |
+| `/login`                 | Public | Animated login                   |
+| `/register`              | Public | Animated student registration    |
 | `/courses`               | Public | Browse courses                   |
 | `/courses/:id`           | Public | Course details                   |
 | `/courses/:id/learn`     | Student | Lesson player (enrolled)         |

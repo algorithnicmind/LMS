@@ -30,12 +30,20 @@ LMS Portal is a learning management system that connects **Admin**, **Instructor
 
 ## 4. Functional Requirements
 
+### FR-0 Landing Page (Public)
+- FR-0.1 Animated landing page with modern, professional hero section.
+- FR-0.2 Animated background: 3D scene (Three.js / React Three Fiber) with graceful fallback to animated gradient/particle mesh.
+- FR-0.3 Animated UI components: staggered hero text reveal, scroll-triggered feature cards, animated stats counters, course showcase, testimonial/social proof section.
+- FR-0.4 Clear CTAs: "Sign In", "Create Account", "Browse Courses".
+- FR-0.5 Respects `prefers-reduced-motion` (animations degrade gracefully).
+
 ### FR-1 User Management
-- FR-1.1 Registration: student can register with name, email, password.
-- FR-1.2 Login / Logout (JWT-based).
+- FR-1.1 Registration: student can register with name, email, password (animated auth page).
+- FR-1.2 Login / Logout with animated sign-in page (field focus motion, button states, error shake/feedback).
 - FR-1.3 Roles: Admin, Instructor, Student.
 - FR-1.4 Admin can create/manage instructor accounts.
 - FR-1.5 Profile view & edit (name, email, password change).
+- FR-1.6 RBAC: after login, user is redirected to role-based dashboard (Student/Instructor/Admin); every protected route enforces the role via route guards.
 
 ### FR-2 Course Management
 - FR-2.1 Admin/Instructor can create, edit, delete courses.
@@ -63,10 +71,17 @@ LMS Portal is a learning management system that connects **Admin**, **Instructor
 ## 5. Non-Functional Requirements
 
 - **Security**: Passwords hashed (Django PBKDF2/bcrypt), JWT auth, role-based access control (RBAC).
-- **Performance**: Page load < 2s, API responses < 500ms under normal load.
+- **Performance**: Page load < 2s, API responses < 500ms under normal load. Landing page LCP < 1.5s (lazy-load 3D canvas, use fallback until ready).
 - **Scalability**: Stateless API; DB connection pooling; index on frequently queried fields.
 - **Usability**: Mobile-friendly responsive React UI.
 - **Reliability**: Validations on both frontend and backend; friendly error messages.
+- **UI/UX Quality (Production-Grade)**:
+  - Modern, professional, consistent design system (Tailwind tokens: colors, typography, spacing).
+  - Micro-interactions on all interactive elements (hover, focus, tap, press).
+  - Smooth page transitions between routes (Framer Motion `AnimatePresence`).
+  - Animated loading states and skeletons; no blank screens.
+  - Motion accessibility: respect `prefers-reduced-motion`; no seizure-triggering effects.
+  - Consistent empty/error/loading states across all screens.
 
 ## 6. Out of Scope (v1)
 
