@@ -83,21 +83,7 @@ RBAC: success → animated redirect to role dashboard
 └────────────────────────────────────────────────────┘
 ```
 
-## 2. Login / Register
-
-```
-┌───────────────────────────┐
-│  LMS Portal               │
-│ ┌───────────────────────┐ │
-│ │ Email [____________]  │ │
-│ │ Password [_________]  │ │
-│ │ [Sign In]             │ │
-│ │ New here? [Register]  │ │
-│ └───────────────────────┘ │
-└───────────────────────────┘
-```
-
-## 3. Course Detail (Student, enrolled)
+## 4. Course Detail (Student, enrolled)
 
 ```
 ┌────────────────────────────────────────────────────┐
@@ -113,7 +99,7 @@ RBAC: success → animated redirect to role dashboard
 └────────────────────────────┴───────────────────────┘
 ```
 
-## 4. Lesson Player
+## 5. Lesson Player
 
 ```
 ┌────────────────────────────────────────────────────┐
@@ -236,12 +222,13 @@ RBAC: success → animated redirect to role dashboard
 
 | Screen                | Route                 | Wireframe |
 | --------------------- | --------------------- | --------- |
-| Catalog               | `/`                   | 1, 10     |
-| Login / Register      | `/login`, `/register` | 2         |
-| Course Detail         | `/courses/:id`        | 3         |
-| Lesson Player         | `/courses/:id/learn`  | 4         |
-| Quiz                  | `/courses/:id/quiz/:qid` | 5      |
-| Student Dashboard     | `/dashboard`          | 6         |
-| Instructor Course Mgmt | `/instructor/courses/:id` | 7     |
-| Grading               | `/instructor/grading` | 8         |
-| Admin Dashboard       | `/admin`              | 9         |
+| Landing (animated)    | `/`                   | 1, 10     |
+| Login / Register (animated) | `/login`, `/register` | 2     |
+| Catalog               | `/courses`            | 3         |
+| Course Detail         | `/courses/:id`        | 4         |
+| Lesson Player         | `/courses/:id/learn`  | 5         |
+| Quiz                  | `/courses/:id/quiz/:qid` | 6      |
+| Student Dashboard     | `/dashboard`          | 7         |
+| Instructor Course Mgmt | `/instructor/courses/:id` | 8     |
+| Grading               | `/instructor/grading` | 9         |
+| Admin Dashboard       | `/admin`              | 10        |
