@@ -198,36 +198,81 @@ def recompute_course_progress(student, course):
                   'percent': (done / total * 100) if total else 0})
 ```
 
+### frontend ProtectedRoute (RBAC guard)
+```tsx
+function ProtectedRoute({ role, children }: { role: Role; children: ReactNode }) {
+  const { user, loading } = useAuth();
+  if (loading) return <Skeleton />;
+  if (!user) return <Navigate to="/login" replace />;
+  if (user.role !== role) return <Navigate to={dashboardFor(user.role)} replace />;
+  return <>{children}</>;
+}
+```
+
+### frontend PageTransition (motion wrapper)
+```tsx
+function PageTransition({ children }: { children: ReactNode }) {
+  const { prefersReducedMotion } = useReducedMotion();
+  return (
+    <motion.div
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+```
+
 ---
 
 ## 4. React Component Tree (Highlights)
 
 ```
 App
-└── AuthProvider
-    ├── PublicRoutes
-    │   ├── HomePage ── CourseCatalog ── CourseCard
-    │   ├── LoginPage / RegisterPage
-    │   └── CourseDetailPage ── EnrollButton
-    ├── StudentRoutes (ProtectedRoute role=STUDENT)
-    │   ├── Dashboard ── MyCourses ── CourseCard
-    │   ├── LearnPage ── Sidebar(lesson list) ── LessonViewer ── CompleteButton
-    │   ├── QuizPage ── QuizPlayer ── ResultBanner
-    │   ├── AssignmentsPage ── AssignmentList ── SubmitForm
-    │   └── ProgressPage ── ProgressBar ── ScoreTable
-    ├── InstructorRoutes (ProtectedRoute role=INSTRUCTOR)
-    │   ├── CourseFormPage / LessonFormPage / QuizFormPage / AssignmentFormPage
-    │   └── GradingPage ── SubmissionsTable ── GradeForm
-    └── AdminRoutes (ProtectedRoute role=ADMIN)
-        ├── UserManagementPage
-        ├── CourseOverviewPage
-        └── ReportsPage ── StatsCards ── ReportsTable
+├── Providers: AuthProvider · ThemeProvider · MotionProvider (reduced-motion)
+├── AnimatedRoutes (AnimatePresence + PageTransition)
+│   ├── PublicRoutes
+│   │   ├── LandingPage
+│   │   │   ├── Navbar (motion slide-in)
+│   │   │   ├── HeroSection
+│   │   │   │   ├── ThreeHeroCanvas (R3F, lazy) ──fallback──> AnimatedBackground
+│   │   │   │   ├── HeroTitle (staggered letter/line reveal)
+│   │   │   │   └── CTAButtons (hover/press motion) → /login, /register
+│   │   │   ├── StatsBar (AnimatedCounter x4)
+│   │   │   ├── FeaturesGrid (RevealOnScroll cards)
+│   │   │   ├── CourseShowcase (MotionCard grid) → /courses
+│   │   │   └── Footer
+│   │   ├── AuthPage (animated login/register)
+│   │   │   ├── AuthCard (scale/fade enter)
+│   │   │   ├── FormFields (focus ring motion, error shake)
+│   │   │   └── SubmitButton (loading spinner state)
+│   │   ├── CourseCatalogPage ── CourseCard (MotionCard)
+│   │   └── CourseDetailPage ── EnrollButton
+│   ├── StudentRoutes (ProtectedRoute role=STUDENT)
+│   │   ├── Dashboard ── MyCourses ── CourseCard
+│   │   ├── LearnPage ── Sidebar(lesson list) ── LessonViewer ── CompleteButton
+│   │   ├── QuizPage ── QuizPlayer ── ResultBanner
+│   │   ├── AssignmentsPage ── AssignmentList ── SubmitForm
+│   │   └── ProgressPage ── ProgressBar (animated fill) ── ScoreTable
+│   ├── InstructorRoutes (ProtectedRoute role=INSTRUCTOR)
+│   │   ├── CourseFormPage / LessonFormPage / QuizFormPage / AssignmentFormPage
+│   │   └── GradingPage ── SubmissionsTable ── GradeForm
+│   └── AdminRoutes (ProtectedRoute role=ADMIN)
+│       ├── UserManagementPage
+│       ├── CourseOverviewPage
+│       └── ReportsPage ── StatsCards ── ReportsTable
+
+Reusable motion primitives (src/components/motion/):
+  PageTransition · RevealOnScroll · AnimatedCounter · MotionCard · Skeleton
+  AnimatedBackground · ThreeHeroCanvas · ErrorState · EmptyState
 ```
 
 ---
 
 ## 5. API Contract Example (JSON)
-
 ### POST /api/v1/courses/{id}/enroll/
 Request: `{}`
 Response 201:

@@ -31,8 +31,11 @@
 ## 2. Logical Components
 
 ### Frontend (React.js)
-- **Auth module**: login, register, JWT storage, route guards.
-- **Catalog**: course list/search/detail.
+- **Design system layer**: Tailwind tokens, theme (light/dark), shared UI primitives.
+- **Animation layer**: Framer Motion primitives (`PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`); Three.js/R3F `ThreeHeroCanvas` (lazy-loaded, with fallback `AnimatedBackground`).
+- **Auth & RBAC layer**: `AuthContext` (JWT state) + `ProtectedRoute` route guard per role; role redirects after login.
+- **Landing**: animated hero with 3D background, animated stats, feature cards, course showcase, CTAs.
+- **Auth pages**: animated login/register with motion feedback.
 - **Learning**: lesson player, progress bar, quiz player, assignment submission.
 - **Instructor module**: course/lesson/quiz/assignment management, grading.
 - **Admin module**: user management, platform reports.
@@ -52,6 +55,23 @@
 2. Django middleware: CORS → JWT authentication → permission check.
 3. View/Serializer validates input → business logic in service layer.
 4. ORM queries PostgreSQL → response serialized → JSON back to React.
+
+> Frontend motion note: landing/3D scene renders client-side only (no data dependency);
+> page transitions and micro-interactions do not block API requests.
+
+## 3b. Frontend Runtime Layers
+
+```
+React App
+ ├─ Providers: AuthProvider, ThemeProvider, ReducedMotionContext
+ ├─ Router (AnimatePresence wrapper → PageTransition)
+ │    ├─ PublicRoutes      (Landing, Login, Register, Catalog)
+ │    ├─ StudentRoutes     (ProtectedRoute role=STUDENT)
+ │    ├─ InstructorRoutes  (ProtectedRoute role=INSTRUCTOR)
+ │    └─ AdminRoutes       (ProtectedRoute role=ADMIN)
+ ├─ Animation primitives: RevealOnScroll, AnimatedCounter, MotionCard, Skeleton
+ └─ ThreeHeroCanvas (lazy chunk) ──fallback──> AnimatedBackground (gradient/particles)
+```
 
 ## 4. API Design Summary
 

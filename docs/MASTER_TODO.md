@@ -13,15 +13,23 @@ Legend: [ ] = pending, [x] = done
 - [ ] Configure PostgreSQL connection (`lms_db`) + initial migration
 - [ ] Install `django-cors-headers`, allow Vite origin
 - [ ] Health endpoint `GET /health/`
+- [ ] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
+- [ ] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
+- [ ] Build motion primitives: `PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`, `Skeleton`
+- [ ] `ReducedMotionContext` (respects `prefers-reduced-motion` globally)
 
-## Phase 1 - User Management (Auth)
+## Phase 1 - Landing Page + Auth + RBAC
 
+- [ ] **Landing page**: hero section with staggered text reveal + CTAs
+- [ ] **3D animated background**: `ThreeHeroCanvas` (lazy-loaded) + `AnimatedBackground` fallback (gradient/particles)
+- [ ] Landing sections: animated stats, features grid (scroll reveals), course showcase, footer
+- [ ] **Animated auth pages**: login + register with motion enter, focus rings, error shake, loading button states
 - [ ] Custom User model (email, name, role) + migration
 - [ ] Register API (student), Login API (JWT access/refresh)
-- [ ] RBAC permissions (`IsInstructorOrAdmin`)
+- [ ] RBAC permissions (`IsInstructorOrAdmin`) on backend
+- [ ] `ProtectedRoute` role guard + role-based redirects after login (Student/Instructor/Admin dashboards)
 - [ ] Profile endpoint `GET /api/v1/users/me/`
 - [ ] Admin: create instructor account endpoint
-- [ ] React: login/register pages, AuthContext, route guards
 - [ ] Tests: auth happy path + role denials
 
 ## Phase 2 - Course & Lesson Management
@@ -68,6 +76,11 @@ Legend: [ ] = pending, [x] = done
 - [ ] Consistent error JSON + axios 401 interceptor
 - [ ] Form validations (frontend + backend)
 - [ ] Responsive/mobile-friendly UI pass
+- [ ] Motion polish: tune durations/easings, hover/press states on all interactive elements
+- [ ] Animated loading states: skeletons, spinners, progress bar fill animations
+- [ ] 3D scene budget: lazy chunk size check, dpr clamp, pause on tab hidden, WebGL fallback
+- [ ] Reduced-motion audit: verify all animations collapse under `prefers-reduced-motion`
+- [ ] Performance budget: landing LCP < 1.5s, Lighthouse score ≥ 90 (Performance/A11y/Best Practices)
 - [ ] Seed data script (demo admin/instructor/student, sample course)
 - [ ] README setup instructions (run backend + frontend)
 

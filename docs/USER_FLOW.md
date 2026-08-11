@@ -7,31 +7,39 @@
 ```
 Start
   │
-  ├─ Visit Home → Browse course catalog
+  ├─ Visit Landing Page (animated hero w/ 3D background,
+  │   motion UI: stats, features, course showcase)
+  │     ├─ "Browse Courses" → Course catalog
+  │     └─ "Sign In" / "Create Account" → Animated auth page
   ├─ View course details
   │     └─ "Enroll" → Redirect to Login (or Register)
   ├─ Login ──────────────┐
   └─ Register (Student) ─┘
           │
           ▼
-      Enter Dashboard
+   RBAC redirect by role (see below)
 ```
 
 ## 2. Authentication Flow
 
 ```
-Register:
-  Name + Email + Password → Validate → Create Student → Auto-login → Dashboard
+Register (animated page):
+  Name + Email + Password → Validate (motion error feedback)
+  → Create Student → Auto-login → JWT issued → RBAC redirect → Student Dashboard
 
-Login:
+Login (animated page):
   Email + Password → Validate credentials → Issue JWT (access+refresh)
-  → Store in localStorage → Redirect by role
+  → Store in localStorage → RBAC redirect by role
 ```
 
-Role redirects:
+Role redirects (RBAC):
 - Student → Student Dashboard
 - Instructor → Instructor Dashboard
 - Admin → Admin Dashboard
+
+Every protected route is wrapped in `ProtectedRoute` (role guard):
+- Guest hits protected route → redirect `/login`
+- Wrong role hits route → redirect to own role dashboard
 
 ## 3. Student Flow
 

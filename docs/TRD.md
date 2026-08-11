@@ -37,8 +37,27 @@
 
 ### 1.3 Key Components
 - `AuthContext` – token storage, login/logout, route guards.
+- `ProtectedRoute` – RBAC guard: takes `role` prop (STUDENT/INSTRUCTOR/ADMIN); redirects guests to `/login` and wrong-role users to their dashboard.
+- `LandingPage` – animated hero, `ThreeHeroCanvas`, animated stats, feature cards, course showcase, CTAs.
+- `ThreeHeroCanvas` – Three.js scene via R3F; lazy-loaded, renders behind hero; falls back to gradient-mesh animation while loading / when WebGL unavailable.
+- `AnimatedBackground` – reusable animated gradient/particle layer (used by landing + auth).
+- `AuthPage` – animated login/register: field focus rings, button loading/error shake states.
+- `PageTransition` – Framer Motion `AnimatePresence` wrapper for route enter/exit animations.
+- `RevealOnScroll`, `AnimatedCounter`, `MotionCard` – reusable motion primitives.
 - `CourseCard`, `LessonViewer`, `QuizPlayer`, `AssignmentForm`.
-- `ProgressBar`, `ReportsTable`.
+- `ProgressBar`, `ReportsTable`, `Skeleton`, `EmptyState`, `ErrorState`.
+
+### 1.4 Design System & Motion Spec
+- **Styling**: Tailwind CSS utility classes + design tokens (colors, spacing, radii, shadows, typography) in `tailwind.config`.
+- **Palette**: primary (brand), secondary, accent, success/warning/danger, neutrals (light/dark modes supported).
+- **Typography**: 2 type scales (display + body), consistent heading hierarchy.
+- **Motion tokens** (Framer Motion):
+  - Durations: `fast = 0.15s`, `base = 0.3s`, `slow = 0.6s`.
+  - Easings: `standard`, `decelerate` (exit), `spring` (hero/success).
+  - Micro-interactions: hover lift + shadow, press scale `0.97`, focus ring transition.
+  - Route transition: enter `fade + slideY 24px`, exit `fade` (300ms).
+- **3D scene budget**: hero canvas ≤ 60fps on mid-range devices; auto-pause on tab hidden; `dpr` clamp `[1, 1.75]`; lazy-load chunk ~1.5MB max.
+- **Accessibility**: global `useReducedMotion()` from Framer Motion; when reduced, all motion collapses to instant/static states.
 
 ## 2. Backend (Django)
 
