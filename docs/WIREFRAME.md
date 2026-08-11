@@ -4,7 +4,64 @@
 
 ---
 
-## 1. Home / Course Catalog `/`
+## 1. Landing Page `/`
+
+```
+┌────────────────────────────────────────────────────┐
+│ [Logo] LMS Portal   Features  Courses  [Login][Sign│
+│                                             Up]    │
+├────────────────────────────────────────────────────┤
+│  ◄── 3D ANIMATED BACKGROUND (Three.js) ──►         │
+│  ┌──────────────────────────────────────────────┐  │
+│  │   Learn Anything,                          │  │
+│  │   Anytime, Anywhere.                       │  │
+│  │   [Explore Courses]  [Create Account]      │  │
+│  │   (staggered text reveal, glow CTAs)       │  │
+│  └──────────────────────────────────────────────┘  │
+├────────────────────────────────────────────────────┤
+│  Stats (animated counters):                        │
+│  ▓ 120+ Courses   ▓ 5k Students   ▓ 98% Complete   │
+├────────────────────────────────────────────────────┤
+│  Features (scroll-reveal cards):                   │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐           │
+│  │ Video    │ │ Quizzes  │ │ Progress │           │
+│  │ Lessons  │ │ Auto-    │ │ Reports  │           │
+│  │          │ │ graded   │ │          │           │
+│  └──────────┘ └──────────┘ └──────────┘           │
+├────────────────────────────────────────────────────┤
+│  Popular Courses (motion cards)                    │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐           │
+│  │ Python   │ │ Django   │ │ React    │           │
+│  │ ★★★★★   │ │ ★★★★    │ │ ★★★★    │           │
+│  └──────────┘ └──────────┘ └──────────┘           │
+├────────────────────────────────────────────────────┤
+│  Footer                                            │
+└────────────────────────────────────────────────────┘
+```
+
+**Animation notes:** hero text staggered reveal on load · 3D scene moves subtly on mouse move · stats count up on scroll into view · feature cards slide/fade in · course cards lift on hover.
+
+## 2. Sign In / Register (Animated)
+
+```
+┌────────────────────────────────────────────────────┐
+│ ◄─ AnimatedBackground (gradient/particles) ─►      │
+│  ┌───────────────────────────┐  (card: scale+fade  │
+│  │  Welcome back!            │   enter)            │
+│  │ ┌───────────────────────┐ │                    │
+│  │ │ Email [____________]  │ │ (focus ring glow)  │
+│  │ │ Password [_________]  │ │ (error shake)      │
+│  │ │ [Sign In →]           │ │ (loading spinner)  │
+│  │ │ New here? [Register]  │ │                    │
+│  │ └───────────────────────┘ │                    │
+│  └───────────────────────────┘                    │
+└────────────────────────────────────────────────────┘
+
+RBAC: success → animated redirect to role dashboard
+  Student → /dashboard · Instructor → /instructor · Admin → /admin
+```
+
+## 3. Course Catalog `/courses`
 
 ```
 ┌────────────────────────────────────────────────────┐
