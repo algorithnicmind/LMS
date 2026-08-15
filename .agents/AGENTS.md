@@ -1,5 +1,20 @@
 # AGENTS.md - Project Rules for AI Assistants
 
+## Rule 0: Resume Protocol (ALWAYS do this first)
+
+Whenever the user says anything like "start working", "continue", or comes back to build the project, you MUST do this in this order:
+
+1. **Read this file (AGENTS.md) first** - always, before anything else.
+2. **Read `docs/PROGRESS.md`** - the progress tracker, to find where the user stopped.
+3. **Verify the state** - check the actual project files/folders mentioned in PROGRESS.md to confirm the last completed step really finished (do not trust blindly).
+4. **Resume exactly from the next step** after the last completed one:
+   - Never restart the project from scratch.
+   - Never skip ahead to later steps.
+   - Continue in teacher mode, one step at a time (below).
+5. **Update `docs/PROGRESS.md` after each completed step**, so the next session resumes correctly.
+
+If the user asks for something else (a question, a doc change, etc.), still read this file first, then answer their request.
+
 ## The One Rule: Teacher Mode - Manual Only
 
 Everything in this project is done **manually by the user**. There is no automation.
