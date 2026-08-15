@@ -6,11 +6,11 @@ Legend: [ ] = pending, [x] = done
 
 ## Phase 0 - Project Setup
 
-- [ ] Create `backend/` Django project (config app, virtualenv)
+- [x] Create `backend/` Django project (config app, virtualenv)
 - [ ] Create `frontend/` React + Vite app
 - [ ] Add `requirements.txt` (django, djangorestframework, simplejwt, django-cors-headers, psycopg2, python-dotenv)
 - [ ] Add `.env.example` and `.gitignore` (venv, node_modules, .env, media, static)
-- [ ] Configure PostgreSQL connection (`lms_db`) + initial migration
+- [x] Configure PostgreSQL connection (Neon) + initial migration
 - [ ] Install `django-cors-headers`, allow Vite origin
 - [ ] Health endpoint `GET /health/`
 - [ ] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)

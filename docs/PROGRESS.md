@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 4 - Django project created (`config` + `manage.py` inside `backend/`)
-- **Next step:** Step 5 - Connect PostgreSQL (`lms_db`, `.env` configuration)
+- **Last completed step:** Step 5 - Connect PostgreSQL (Neon cloud database configured, migrations applied)
+- **Next step:** Step 6 - Create `frontend/` React + Vite app
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | Create `backend/` folder + Python virtual environment (`venv`) | Done |
 | 3 | Activate venv + install Django packages | Done |
 | 4 | Create Django project (`django-admin startproject config .`) | Done |
-| 5 | Connect PostgreSQL (`lms_db`, `.env`) | Next |
+| 5 | Connect PostgreSQL (Neon, `.env`) | Done |
 | 6 | Create `frontend/` React + Vite app | Pending |
 | 7 | `.env.example`, `.gitignore` | Pending |
 | 8 | CORS config for Vite origin | Pending |
