@@ -4,9 +4,9 @@
 
 ## Current Position
 
-- **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 10 - Tailwind CSS v4 + design tokens
-- **Next step:** Step 11 - Framer Motion + Three.js install
+- **Phase:** Phase 1 - Landing Page + Auth + RBAC
+- **Last completed step:** Step 12 - Motion primitives + ReducedMotionContext
+- **Next step:** Landing page: hero + animated 3D background
 
 ---
 
@@ -24,8 +24,8 @@
 | 8 | CORS config for Vite origin (`django-cors-headers`) | Done |
 | 9 | Health endpoint `GET /health/` | Done |
 | 10 | Tailwind CSS v4 + design tokens | Done |
-| 11 | Framer Motion + Three.js install | Pending |
-| 12 | Motion primitives + ReducedMotionContext | Pending |
+| 11 | Framer Motion + Three.js install | Done |
+| 12 | Motion primitives + ReducedMotionContext | Done |
 
 ## Phase 1 - Landing Page + Auth + RBAC
 

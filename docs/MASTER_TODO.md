@@ -14,9 +14,9 @@ Legend: [ ] = pending, [x] = done
 - [x] Install `django-cors-headers`, allow Vite origin
 - [x] Health endpoint `GET /health/`
 - [x] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
-- [ ] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
-- [ ] Build motion primitives: `PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`, `Skeleton`
-- [ ] `ReducedMotionContext` (respects `prefers-reduced-motion` globally)
+- [x] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
+- [x] Build motion primitives: `PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`, `Skeleton`
+- [x] `ReducedMotionContext` (respects `prefers-reduced-motion` globally)
 
 ## Phase 1 - Landing Page + Auth + RBAC
 
