@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 8 - CORS config for Vite origin (`django-cors-headers`)
-- **Next step:** Step 9 - Health endpoint `GET /health/`
+- **Last completed step:** Step 9 - Health endpoint `GET /health/`
+- **Next step:** Step 10 - Tailwind CSS v4 + design tokens
 
 ---
 
@@ -22,7 +22,7 @@
 | 6 | Create `frontend/` React + Vite app | Done |
 | 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Done |
 | 8 | CORS config for Vite origin (`django-cors-headers`) | Done |
-| 9 | Health endpoint `GET /health/` | Pending |
+| 9 | Health endpoint `GET /health/` | Done |
 | 10 | Tailwind CSS v4 + design tokens | Pending |
 | 11 | Framer Motion + Three.js install | Pending |
 | 12 | Motion primitives + ReducedMotionContext | Pending |

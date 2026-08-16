@@ -12,7 +12,7 @@ Legend: [ ] = pending, [x] = done
 - [x] Add `.env.example` and root `.gitignore` (venv, node_modules, .env, media, static, dist)
 - [x] Configure PostgreSQL connection (Neon) + initial migration
 - [x] Install `django-cors-headers`, allow Vite origin
-- [ ] Health endpoint `GET /health/`
+- [x] Health endpoint `GET /health/`
 - [ ] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
 - [ ] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
 - [ ] Build motion primitives: `PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`, `Skeleton`
