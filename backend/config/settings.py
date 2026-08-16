@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'django_filters',
+    'axes',
     # Local apps
     'users',
     'courses',
@@ -152,6 +154,12 @@ MAILERS = {
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# Authentication Backends (for django-axes)
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Django REST Framework
 REST_FRAMEWORK = {
