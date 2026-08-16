@@ -13,7 +13,7 @@ Legend: [ ] = pending, [x] = done
 - [x] Configure PostgreSQL connection (Neon) + initial migration
 - [x] Install `django-cors-headers`, allow Vite origin
 - [x] Health endpoint `GET /health/`
-- [ ] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
+- [x] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
 - [ ] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
 - [ ] Build motion primitives: `PageTransition`, `RevealOnScroll`, `AnimatedCounter`, `MotionCard`, `Skeleton`
 - [ ] `ReducedMotionContext` (respects `prefers-reduced-motion` globally)

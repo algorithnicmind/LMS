@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 9 - Health endpoint `GET /health/`
-- **Next step:** Step 10 - Tailwind CSS v4 + design tokens
+- **Last completed step:** Step 10 - Tailwind CSS v4 + design tokens
+- **Next step:** Step 11 - Framer Motion + Three.js install
 
 ---
 
@@ -23,7 +23,7 @@
 | 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Done |
 | 8 | CORS config for Vite origin (`django-cors-headers`) | Done |
 | 9 | Health endpoint `GET /health/` | Done |
-| 10 | Tailwind CSS v4 + design tokens | Pending |
+| 10 | Tailwind CSS v4 + design tokens | Done |
 | 11 | Framer Motion + Three.js install | Pending |
 | 12 | Motion primitives + ReducedMotionContext | Pending |
 
