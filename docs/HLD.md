@@ -87,18 +87,58 @@ React App
 
 ## 5. Security Design
 
-- Passwords: Django's default PBKDF2 hashing.
-- Tokens: JWT access (short-lived) + refresh (long-lived) via simplejwt.
-- RBAC: `IsAuthenticated`, `IsInstructorOrAdmin`, owner checks.
-- CORS: allow only frontend origin(s) from env.
-- Sensitive data in `.env` (SECRET_KEY, DB credentials), never committed.
+- **Passwords**: Django's default PBKDF2 hashing (iterations=600000).
+- **Tokens**: JWT access (15min) + refresh (7d rotating) via simplejwt, stored in **httpOnly cookies** (`SameSite=Strict`, `Secure`).
+- **CSP**: `django-csp` with strict policy (see TRD §2.1.1).
+- **HSTS**: `django-secure` → `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`.
+- **RBAC**: `IsAuthenticated`, `IsInstructorOrAdmin`, owner checks on object-level permissions.
+- **CORS**: Allow only frontend origin(s) from env (`CORS_ALLOWED_ORIGINS`).
+- **Rate Limiting**: `django-ratelimit` (10/min on `/auth/token/`, 5/min on `/auth/register/`).
+- **Brute Force**: `django-axes` lockout after 5 failed logins.
+- **Sensitive Data**: `.env` for all secrets (SECRET_KEY, DB, JWT, SENTRY_DSN), never committed.
+- **Dependency Scanning**: `npm audit` + `pip-audit` in CI, Dependabot alerts.
+- **Error Tracking**: Sentry (frontend + backend) with source maps uploaded in CI.
 
 ## 6. Non-Functional Design
 
-- **Performance**: DB indexes (`course.status`, `enrollment.student`, `lesson.order`), select_related/prefetch_related in list endpoints.
-- **Scalability**: stateless Django API → scale horizontally; PostgreSQL connection pooling.
-- **Availability**: single instance v1; restart policies; health check endpoint `GET /health/`.
-- **Observability**: Django logging to console/file; request-id middleware.
+### 6.1 Performance Targets
+| Metric | Target | Strategy |
+|--------|--------|----------|
+| LCP (Landing) | < 1.5s | Preload fonts, critical CSS inline, lazy 3D chunk |
+| INP | < 200ms | Minimize main-thread work, code-split routes |
+| CLS | < 0.1 | Reserve space for images/3D canvas |
+| Lighthouse | ≥ 90 | All categories (Perf, A11y, BP, SEO) |
+| API p95 | < 200ms | `select_related`/`prefetch_related`, DB indexes, caching |
+| Bundle (gz) | < 150KB | Tree-shaking, dynamic imports for heavy libs |
+| 3D FPS | 60fps mid-range | Shader-based, dpr clamp [1, 1.75], pause on hidden |
+
+### 6.2 Scalability
+- Stateless Django API → horizontal scaling behind load balancer
+- PostgreSQL connection pooling (PgBouncer) for high concurrency
+- CDN for static assets (Cloudflare, CloudFront)
+- Redis cache for session data, rate limits, query results
+
+### 6.3 Availability
+- Health: `/health/` (liveness) + `/ready/` (readiness: DB, migrations, cache)
+- Graceful shutdown handling (SIGTERM)
+- Rolling deployments with zero-downtime
+
+### 6.4 Observability
+| Layer | Tool | Implementation |
+|-------|------|----------------|
+| Frontend Errors | Sentry | `ErrorBoundary` per route, `captureException` |
+| Backend Errors | Sentry | Django integration, request context |
+| Performance | Web Vitals + Sentry | `web-vitals` lib, custom metrics |
+| Logs | Structured JSON | `python-json-logger`, correlation IDs |
+| Metrics | Prometheus/Grafana | `/metrics` endpoint (django-prometheus) |
+
+### 6.5 Accessibility (WCAG 2.1 AA)
+- Semantic HTML, proper heading hierarchy
+- Focus visible outlines (Tailwind `focus-visible:ring`)
+- ARIA labels on icon buttons, live regions for toasts
+- Color contrast ≥ 4.5:1 (Tailwind tokens verified)
+- Keyboard navigation for all interactive elements
+- `prefers-reduced-motion` respected globally (`ReducedMotionContext`)
 
 ## 7. Deployment (Target)
 

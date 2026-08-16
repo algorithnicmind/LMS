@@ -84,6 +84,52 @@ Legend: [ ] = pending, [x] = done
 - [ ] Seed data script (demo admin/instructor/student, sample course)
 - [ ] README setup instructions (run backend + frontend)
 
+## Phase 6b - Production Hardening (Security, Observability, Performance)
+
+### Security
+- [ ] Add `django-csp`, `django-secure`, `django-ratelimit`, `django-axes` to requirements
+- [ ] Configure CSP headers (strict policy)
+- [ ] Configure HSTS, secure cookies, SameSite=Strict
+- [ ] Configure JWT in httpOnly cookies (access 15m, refresh 7d rotating)
+- [ ] Add rate limiting on auth endpoints (10/min token, 5/min register)
+- [ ] Add brute-force protection (django-axes)
+- [ ] Add Sentry SDK (frontend + backend) with source map upload
+- [ ] Dependency scanning: `npm audit` + `pip-audit` in CI
+- [ ] CSP report-only mode → enforce after verification
+
+### Observability
+- [ ] Structured JSON logging (python-json-logger)
+- [ ] Request correlation IDs middleware
+- [ ] Web Vitals collection (web-vitals lib) → Sentry
+- [ ] Custom metrics: API latency, error rates, business events
+- [ ] Health check `/ready/` (DB, migrations, cache)
+- [ ] Prometheus metrics endpoint (django-prometheus)
+
+### Performance
+- [ ] Code splitting: `React.lazy` + `Suspense` on all routes
+- [ ] Dynamic imports for heavy libs (Three.js, charting)
+- [ ] Image optimization: `vite-imagetools` + Cloudinary/ImageKit
+- [ ] Font optimization: subset, preload, `font-display: swap`
+- [ ] Service worker (vite-plugin-pwa) for offline caching
+- [ ] Bundle analysis (rollup-plugin-visualizer) in CI
+- [ ] CDN configuration for static assets
+
+### Testing & Quality
+- [ ] Vitest unit tests (components, hooks, utils)
+- [ ] Playwright E2E tests (auth, enroll, quiz, progress)
+- [ ] Visual regression tests (Playwright snapshots)
+- [ ] Accessibility tests (axe-core in CI)
+- [ ] Backend pytest: services, serializers, permissions
+- [ ] Contract tests (API schema validation)
+
+### CI/CD (GitHub Actions)
+- [ ] Lint: oxlint + ruff
+- [ ] Typecheck: tsc --noEmit + pyright/mypy
+- [ ] Test: vitest --coverage + pytest --cov
+- [ ] Build: vite build + python -m build
+- [ ] Security: npm audit + pip-audit + trivy
+- [ ] Deploy: staging → production (manual approval)
+
 ## Phase 7 - Deployment (Optional)
 
 - [ ] Collect static, media config

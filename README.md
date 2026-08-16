@@ -21,26 +21,39 @@ Learning Management System (LMS) is a comprehensive platform for managing and de
 - **User Management**: Create instructor accounts, manage all users.
 - **Platform Reports**: Platform-wide analytics on users, enrollments, and completion.
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack (Production-Grade)
 
-| Layer      | Technology                        |
-| ---------- | --------------------------------- |
-| Frontend   | React.js (Vite)                   |
-| Backend    | Python - Django (DRF, JWT)        |
-| Database   | PostgreSQL                        |
+| Layer                  | Technology                                                              |
+| ---------------------- | ----------------------------------------------------------------------- |
+| **Frontend Framework** | React 19 + TypeScript + Vite 8                                          |
+| **Styling**            | Tailwind CSS v4                                                         |
+| **Animation**          | Framer Motion 13                                                        |
+| **3D**                 | React Three Fiber + Drei + Three.js                                     |
+| **State (Server)**     | TanStack Query (React Query) v5                                         |
+| **State (Client)**     | Zustand                                                                 |
+| **Forms**              | React Hook Form + Zod                                                   |
+| **UI Primitives**      | shadcn/ui (Radix UI + Tailwind)                                         |
+| **Backend**            | Django 6.1 + DRF + SimpleJWT                                            |
+| **Database**           | PostgreSQL (Neon serverless)                                            |
+| **Auth**               | httpOnly cookies (JWT access 15m, refresh 7d rotating)                  |
+| **Security**           | django-csp, django-secure, django-ratelimit, django-axes                |
+| **Observability**      | Sentry + Web Vitals + Structured JSON logs                              |
+| **Testing**            | Vitest + Playwright + pytest                                            |
+| **CI/CD**              | GitHub Actions                                                          |
 
 ## 📚 Documentation
 
 | Document                    | Description                          |
 | --------------------------- | ------------------------------------ |
-| [ARCHITECTURE](docs/ARCHITECTURE.md) | Base architecture spec        |
+| [ARCHITECTURE](docs/ARCHITECTURE.md) | Architecture spec (production-grade) |
 | [PRD](docs/PRD.md)          | Product Requirements Document        |
 | [TRD](docs/TRD.md)          | Technical Requirements Document      |
-| [USER_FLOW](docs/USER_FLOW.md) | User flows per role              |
 | [HLD](docs/HLD.md)          | High Level Design                    |
 | [LLD](docs/LLD.md)          | Low Level Design (schema, classes)   |
 | [MASTER_TODO](docs/MASTER_TODO.md) | Ordered build plan            |
 | [WIREFRAME](docs/WIREFRAME.md) | Low-fidelity screen wireframes     |
+| [SECURITY](docs/SECURITY.md) | Security documentation               |
+| [USER_FLOW](docs/USER_FLOW.md) | User flows per role              |
 
 ## 📂 Planned Project Structure
 

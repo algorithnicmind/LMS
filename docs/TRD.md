@@ -4,21 +4,82 @@
 | -------------- | --------------------------------------- |
 | Product        | LMS Portal                              |
 | Version        | 1.0                                     |
-| Stack          | React.js / Django / PostgreSQL          |
+| Stack          | React 19 / TypeScript / Django 6.1 / PostgreSQL |
+
+---
+
+## Production-Grade Non-Functional Requirements
+
+### Performance Targets
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| LCP (Landing) | < 1.5s | Web Vitals (75th percentile) |
+| INP | < 200ms | Web Vitals |
+| CLS | < 0.1 | Web Vitals |
+| Lighthouse Score | ≥ 90 | Performance / A11y / Best Practices / SEO |
+| API p95 | < 200ms | Django + DRF (cached queries) |
+| Bundle Size (gz) | < 150KB | Initial JS + CSS |
+| 3D Scene FPS | 60fps mid-range | R3F, dpr clamp [1, 1.75] |
+
+### Security Requirements
+| Requirement | Implementation |
+|-------------|----------------|
+| CSP Headers | `django-csp`: `script-src 'self'; object-src 'none'; base-uri 'self'; img-src 'self' data: https:; font-src 'self' data:;` |
+| HSTS | `django-secure`: `SECURE_HSTS_SECONDS=31536000`, `SECURE_HSTS_INCLUDE_SUBDOMAINS=True` |
+| Cookie Security | `SESSION_COOKIE_SECURE=True`, `CSRF_COOKIE_SECURE=True`, `SAMESITE=Strict` |
+| JWT | Access 15min, Refresh 7d rotating, stored in httpOnly cookies |
+| Rate Limiting | `django-ratelimit`: 10 req/min on `/auth/token/`, 5 req/min on `/auth/register/` |
+| Dependency Scanning | `npm audit` + `pip-audit` in CI, Dependabot alerts |
+| XSS Protection | React auto-escape, Django templates auto-escape, CSP |
+| CSRF Protection | Django CSRF middleware + `SameSite=Strict` cookies |
+
+### Observability
+| Layer | Tool | Key Signals |
+|-------|------|-------------|
+| Frontend Errors | Sentry | React error boundaries, source maps |
+| Backend Errors | Sentry | Django integration, request context |
+| Performance | Web Vitals + Sentry | LCP, INP, CLS, TTFB |
+| Logs | Structured JSON | Correlation IDs, request tracing |
+| Health | `/health/` + `/ready/` | DB pool, migrations, cache |
+
+### Accessibility (WCAG 2.1 AA)
+- Semantic HTML, proper heading hierarchy (h1 → h2 → h3)
+- Focus visible: `focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`
+- ARIA labels on icon buttons, live regions for toasts
+- Color contrast ≥ 4.5:1 (verified in Tailwind tokens)
+- Keyboard navigation for all interactive elements
+- `prefers-reduced-motion` respected globally (already implemented)
+
+### Testing Strategy
+| Type | Tool | Coverage Target |
+|------|------|-----------------|
+| Unit (FE) | Vitest + React Testing Library | 80% components |
+| Unit (BE) | pytest + factory_boy | 85% services/serializers |
+| Integration | RTK Query + MSW mocks | Critical API flows |
+| E2E | Playwright (chromium, firefox, webkit) | Auth, enroll, quiz, progress |
+| Visual Regression | Playwright snapshots | Key pages |
+| Accessibility | axe-core in CI | 0 violations |
 
 ---
 
 ## 1. Frontend (React.js)
 
+## 1. Frontend (React.js)
+
 ### 1.1 Tooling
-- React 18+ with Vite (fast build).
-- React Router for routing.
-- Axios for HTTP requests to Django API.
-- Context API or Redux Toolkit for auth/user state.
-- **Tailwind CSS** (v4) for styling and design-system tokens.
+- React 19 + TypeScript with Vite 8 (fast build, ES modules native).
+- React Router v7 for routing (data loading, actions).
+- **TanStack Query (React Query) v5** for server state: caching, deduping, retries, prefetch, optimistic updates.
+- **Zustand** for client UI state (modals, sidebars, theme).
+- **React Hook Form + Zod** for forms: performant, schema validation shared with backend.
+- **shadcn/ui** (Radix UI primitives + Tailwind) for accessible UI components: Button, Input, Card, Dialog, Toast, Table, Select, etc.
+- **Axios** (thin wrapper) for HTTP with interceptors (auth refresh, error normalization).
+- **Tailwind CSS v4** for styling and design-system tokens (colors, spacing, radii, shadows, typography).
 - **Framer Motion** for animations: route transitions (`AnimatePresence`), scroll reveals, hover/press micro-interactions, animated counters.
 - **Three.js + @react-three/fiber + @react-three/drei** for the animated 3D hero background on the landing page.
 - **RBAC**: `ProtectedRoute` wrapper component reading user role from AuthContext; redirects unauthorized users by role.
+- **Error Boundaries**: Per-route React error boundaries with fallback UI.
+- **Suspense Boundaries**: For code-split routes and async components.
 
 ### 1.2 Pages / Routes
 | Route                    | Access | Purpose                          |
@@ -62,10 +123,55 @@
 ## 2. Backend (Django)
 
 ### 2.1 Setup
-- Django 5.x + Django REST Framework (DRF).
-- `djangorestframework-simplejwt` for JWT auth.
+- Django 6.1 + Django REST Framework (DRF).
+- `djangorestframework-simplejwt` for JWT auth (access 15m, refresh 7d rotating).
 - `psycopg2` driver, `dj-database-url` for DB config.
 - `django-cors-headers` for frontend/backend CORS.
+- `django-csp` for Content Security Policy headers.
+- `django-secure` for HSTS, SSL redirect, secure cookies.
+- `django-ratelimit` for rate limiting on auth endpoints.
+- `django-axes` for brute-force protection on login.
+- `sentry-sdk[django]` for error tracking.
+
+### 2.1.1 Security Configuration
+```python
+# settings.py additions
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_SAMESITE = 'Strict'
+
+# CSP
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")  # Tailwind JIT needs inline
+CSP_IMG_SRC = ("'self'", "data:", "https:")
+CSP_FONT_SRC = ("'self'", "data:")
+CSP_OBJECT_SRC = ("'none'",)
+CSP_BASE_URI = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'none'",)
+
+# SimpleJWT cookie settings
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_COOKIE': 'access_token',
+    'AUTH_COOKIE_REFRESH': 'refresh_token',
+    'AUTH_COOKIE_SECURE': True,
+    'AUTH_COOKIE_HTTP_ONLY': True,
+    'AUTH_COOKIE_SAMESITE': 'Strict',
+}
+
+# Rate limiting
+RATELIMIT_ENABLE = True
+RATELIMIT_USE_CACHE = 'default'
+```
 
 ### 2.2 Django Apps
 | App          | Responsibility                             |
@@ -138,7 +244,55 @@
 
 ## 4. Environment & Tooling
 
-- `backend/requirements.txt` + `.env` for secrets (SECRET_KEY, DB, JWT).
-- `frontend/package.json`, `.env` with `VITE_API_URL`.
-- Docker (optional): `docker-compose.yml` for postgres service.
-- Dev servers: Django `http://127.0.0.1:8000`, Vite `http://127.0.0.1:5173`.
+### 4.1 Backend
+- `backend/requirements.txt` + `.env` for secrets (SECRET_KEY, DB, JWT, SENTRY_DSN).
+- **Required packages** (add to requirements.txt):
+  ```
+  django-csp
+  django-secure
+  django-ratelimit
+  django-axes
+  sentry-sdk
+  ```
+
+### 4.2 Frontend
+- `frontend/package.json`, `.env` with `VITE_API_URL`, `VITE_SENTRY_DSN`.
+- **Required packages** (add to package.json):
+  ```
+  @tanstack/react-query
+  zustand
+  react-hook-form
+  @hookform/resolvers
+  zod
+  @radix-ui/react-dialog
+  @radix-ui/react-dropdown-menu
+  @radix-ui/react-select
+  @radix-ui/react-toast
+  @radix-ui/react-tooltip
+  class-variance-authority
+  clsx
+  tailwind-merge
+  lucide-react
+  ```
+
+### 4.3 CI/CD (GitHub Actions)
+```yaml
+# .github/workflows/ci.yml
+stages:
+  - lint: oxlint + ruff
+  - typecheck: tsc --noEmit + pyright/mypy
+  - test: vitest --coverage + pytest --cov
+  - build: vite build + python -m build
+  - e2e: playwright (chromium, firefox, webkit)
+  - security: npm audit + pip-audit + trivy (container)
+  - deploy: staging → production (manual approval)
+```
+
+### 4.4 Docker (Optional)
+- `docker-compose.yml`: postgres, backend, frontend-nginx
+- Multi-stage builds for minimal production images
+- Health checks on all services
+
+### 4.5 Dev Servers
+- Django: `http://127.0.0.1:8000`
+- Vite: `http://127.0.0.1:5173`

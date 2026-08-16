@@ -1,14 +1,34 @@
-# LMS Portal - Basic Architecture Diagram
+# LMS Portal - Architecture Diagram
 
-> Frontend + Backend + Database (Simple & Student Friendly)
+> Production-Grade: Security, Performance, Observability, Scalability
 
 ## Tech Stack (Chosen)
 
-| Layer      | Technology                          |
-| ---------- | ----------------------------------- |
-| Frontend   | React.js + Tailwind CSS + Framer Motion + Three.js (R3F) |
-| Backend    | Python - Django                     |
-| Database   | PostgreSQL                          |
+| Layer                  | Technology                                                              | Purpose |
+| ---------------------- | ----------------------------------------------------------------------- | ------- |
+| **Frontend Framework** | React 19 + TypeScript                                                   | Concurrent features, strict typing |
+| **Build Tool**         | Vite 8                                                                  | Fast HMR, optimized production builds |
+| **Styling**            | Tailwind CSS v4                                                         | Zero-runtime, JIT, design tokens |
+| **Animation**          | Framer Motion 13                                                        | Declarative, WAAPI, reduced-motion |
+| **3D**                 | React Three Fiber + Drei + Three.js                                     | React-native Three.js, tree-shakable |
+| **State (Server)**     | TanStack Query (React Query)                                            | Caching, deduping, retries, prefetch |
+| **State (Client)**     | Zustand                                                                 | Minimal, typed UI state |
+| **Forms**              | React Hook Form + Zod                                                   | Performant, schema validation shared |
+| **UI Primitives**      | shadcn/ui (Radix UI + Tailwind)                                         | Accessible, copy-paste, no runtime dep |
+| **Backend**            | Django 6.1 + DRF + SimpleJWT                                            | Mature, secure, batteries-included |
+| **Database**           | PostgreSQL (Neon serverless)                                            | ACID, JSONB, scaling |
+| **Auth Tokens**        | httpOnly cookies (access 15m, refresh 7d, rotating)                     | Secure, CSRF-protected |
+| **Rate Limiting**      | django-ratelimit / django-axes                                          | Auth endpoint protection |
+| **Error Tracking**     | Sentry (frontend + backend)                                             | Source maps, release tracking |
+| **Perf Monitoring**    | Web Vitals + Sentry/DataDog                                             | LCP, INP, CLS |
+| **Testing**            | Vitest + Playwright + pytest                                            | Unit, E2E, backend |
+| **CI/CD**              | GitHub Actions (lint, typecheck, test, build, security, deploy)         | Automated quality gates |
+
+## Users
+
+- **Admin**
+- **Instructor**
+- **Student**
 
 ## Users
 
