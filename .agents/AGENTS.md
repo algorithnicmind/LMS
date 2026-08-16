@@ -11,7 +11,7 @@ Whenever the user says anything like "start working", "continue", or comes back 
    - Never restart the project from scratch.
    - Never skip ahead to later steps.
    - Continue in teacher mode, one step at a time (below).
-5. **Update `docs/PROGRESS.md` after each completed step**, so the next session resumes correctly.
+5. **Update `docs/PROGRESS.md` and `docs/MASTER_TODO.md` after each completed step**, so the next session resumes correctly.
 
 If the user asks for something else (a question, a doc change, etc.), still read this file first, then answer their request.
 

@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 6 - Create `frontend/` React + Vite app (already exists with React 19, Vite 8, TypeScript)
-- **Next step:** Step 7 - Add `requirements.txt`, `.env.example`, root `.gitignore`
+- **Last completed step:** Step 7 - Add `requirements.txt`, `.env.example`, root `.gitignore`
+- **Next step:** Step 8 - CORS config for Vite origin (`django-cors-headers`)
 
 ---
 
@@ -20,7 +20,7 @@
 | 4 | Create Django project (`django-admin startproject config .`) | Done |
 | 5 | Connect PostgreSQL (Neon, `.env`) | Done |
 | 6 | Create `frontend/` React + Vite app | Done |
-| 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Pending |
+| 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Done |
 | 8 | CORS config for Vite origin (`django-cors-headers`) | Pending |
 | 9 | Health endpoint `GET /health/` | Pending |
 | 10 | Tailwind CSS v4 + design tokens | Pending |
