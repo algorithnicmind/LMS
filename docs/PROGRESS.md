@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 5 - Connect PostgreSQL (Neon cloud database configured, migrations applied)
-- **Next step:** Step 6 - Create `frontend/` React + Vite app
+- **Last completed step:** Step 6 - Create `frontend/` React + Vite app (already exists with React 19, Vite 8, TypeScript)
+- **Next step:** Step 7 - Add `requirements.txt`, `.env.example`, root `.gitignore`
 
 ---
 
@@ -19,11 +19,11 @@
 | 3 | Activate venv + install Django packages | Done |
 | 4 | Create Django project (`django-admin startproject config .`) | Done |
 | 5 | Connect PostgreSQL (Neon, `.env`) | Done |
-| 6 | Create `frontend/` React + Vite app | Pending |
-| 7 | `.env.example`, `.gitignore` | Pending |
-| 8 | CORS config for Vite origin | Pending |
+| 6 | Create `frontend/` React + Vite app | Done |
+| 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Pending |
+| 8 | CORS config for Vite origin (`django-cors-headers`) | Pending |
 | 9 | Health endpoint `GET /health/` | Pending |
-| 10 | Tailwind CSS + design tokens | Pending |
+| 10 | Tailwind CSS v4 + design tokens | Pending |
 | 11 | Framer Motion + Three.js install | Pending |
 | 12 | Motion primitives + ReducedMotionContext | Pending |
 

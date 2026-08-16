@@ -7,9 +7,9 @@ Legend: [ ] = pending, [x] = done
 ## Phase 0 - Project Setup
 
 - [x] Create `backend/` Django project (config app, virtualenv)
-- [ ] Create `frontend/` React + Vite app
-- [ ] Add `requirements.txt` (django, djangorestframework, simplejwt, django-cors-headers, psycopg2, python-dotenv)
-- [ ] Add `.env.example` and `.gitignore` (venv, node_modules, .env, media, static)
+- [x] Create `frontend/` React + Vite app (React 19, Vite 8, TypeScript)
+- [ ] Add `requirements.txt` (django, djangorestframework, simplejwt, django-cors-headers, psycopg2, python-dotenv, dj-database-url)
+- [ ] Add `.env.example` and root `.gitignore` (venv, node_modules, .env, media, static, dist)
 - [x] Configure PostgreSQL connection (Neon) + initial migration
 - [ ] Install `django-cors-headers`, allow Vite origin
 - [ ] Health endpoint `GET /health/`
