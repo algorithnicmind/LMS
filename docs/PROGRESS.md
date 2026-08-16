@@ -5,8 +5,8 @@
 ## Current Position
 
 - **Phase:** Phase 0 - Project Setup
-- **Last completed step:** Step 7 - Add `requirements.txt`, `.env.example`, root `.gitignore`
-- **Next step:** Step 8 - CORS config for Vite origin (`django-cors-headers`)
+- **Last completed step:** Step 8 - CORS config for Vite origin (`django-cors-headers`)
+- **Next step:** Step 9 - Health endpoint `GET /health/`
 
 ---
 
@@ -21,7 +21,7 @@
 | 5 | Connect PostgreSQL (Neon, `.env`) | Done |
 | 6 | Create `frontend/` React + Vite app | Done |
 | 7 | Add `requirements.txt`, `.env.example`, root `.gitignore` | Done |
-| 8 | CORS config for Vite origin (`django-cors-headers`) | Pending |
+| 8 | CORS config for Vite origin (`django-cors-headers`) | Done |
 | 9 | Health endpoint `GET /health/` | Pending |
 | 10 | Tailwind CSS v4 + design tokens | Pending |
 | 11 | Framer Motion + Three.js install | Pending |

@@ -8,10 +8,10 @@ Legend: [ ] = pending, [x] = done
 
 - [x] Create `backend/` Django project (config app, virtualenv)
 - [x] Create `frontend/` React + Vite app (React 19, Vite 8, TypeScript)
-- [ ] Add `requirements.txt` (django, djangorestframework, simplejwt, django-cors-headers, psycopg2, python-dotenv, dj-database-url)
-- [ ] Add `.env.example` and root `.gitignore` (venv, node_modules, .env, media, static, dist)
+- [x] Add `requirements.txt` (django, djangorestframework, simplejwt, django-cors-headers, psycopg2, python-dotenv, dj-database-url)
+- [x] Add `.env.example` and root `.gitignore` (venv, node_modules, .env, media, static, dist)
 - [x] Configure PostgreSQL connection (Neon) + initial migration
-- [ ] Install `django-cors-headers`, allow Vite origin
+- [x] Install `django-cors-headers`, allow Vite origin
 - [ ] Health endpoint `GET /health/`
 - [ ] Install Tailwind CSS (v4) + design tokens (colors, typography, spacing, shadows)
 - [ ] Install Framer Motion + `@react-three/fiber`, `@react-three/drei`, `three`
